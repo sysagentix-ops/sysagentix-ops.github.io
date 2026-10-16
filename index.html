@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>NEXUS · Research project</title>
-<meta name="description" content="NEXUS is a research project on the automated generation of structured system models from technical documentation.">
+<meta name="description" content="NEXUS is a research project on the automated generation of structured system models from technical documentation. Published at IECON 2026 (Doha, Qatar) and the ICML 2026 AgenticUQ Workshop.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,58 +18,80 @@ try{
 </script>
 <style>
   :root{
-    --ink:#060B0B;
-    --cream:#FFF3EA;
-    --ink-70:rgba(6,11,11,.70);
-    --ink-55:rgba(6,11,11,.55);
-    --ink-40:rgba(6,11,11,.40);
-    --ink-14:rgba(6,11,11,.14);
-    --cream-72:rgba(255,243,234,.72);
-    --cream-30:rgba(255,243,234,.30);
-    --cream-16:rgba(255,243,234,.16);
+    /* Palette: warm paper, deep slate-green ink, teal accent, terracotta highlight */
+    --bg:#F7F4EE;
+    --surface:#FFFFFF;
+    --cream:#FFF6EE;
+    --ink:#132826;
+    --ink-70:rgba(19,40,38,.72);
+    --ink-55:rgba(19,40,38,.56);
+    --ink-40:rgba(19,40,38,.40);
+    --ink-14:rgba(19,40,38,.12);
+    --ink-08:rgba(19,40,38,.07);
+    --accent:#1D6A64;
+    --accent-ink:#134C48;
+    --accent-soft:#E3EFEB;
+    --accent-line:rgba(29,106,100,.28);
+    --warm:#C4613A;
+    --warm-soft:#F8E7DD;
     --display:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     --serif:"Newsreader",Georgia,"Times New Roman",serif;
     --mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
     --bar-h:60px;
-    --edge:clamp(1.25rem,4vw,3.25rem);
+    --edge:clamp(1rem,4vw,3.25rem);
     --maxw:1280px;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(19,40,38,.04),0 8px 28px rgba(19,40,38,.06);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.58;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.58;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
   a{color:inherit}
-  ::selection{background:var(--ink);color:var(--cream)}
+  ::selection{background:var(--accent);color:#fff}
   .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--edge)}
 
-  .topbar{position:sticky;top:0;z-index:40;height:var(--bar-h);background:var(--cream);color:var(--ink);border-bottom:1px solid var(--ink-14);transition:background .35s ease,color .35s ease,border-color .35s ease}
-  .topbar.over-hero{background:transparent;color:var(--cream);border-color:transparent}
+  /* ---------- Top bar ---------- */
+  .topbar{position:sticky;top:0;z-index:40;height:var(--bar-h);background:rgba(247,244,238,.86);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px);color:var(--ink);border-bottom:1px solid var(--ink-14);transition:background .35s ease,border-color .35s ease}
+  .topbar.over-hero{background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
   .topbar .container{height:100%;display:flex;align-items:center;justify-content:space-between}
-  .brand{font-family:var(--mono);font-weight:700;font-size:.86rem;letter-spacing:.18em;text-decoration:none;color:inherit}
+  .brand{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-weight:700;font-size:.86rem;letter-spacing:.18em;text-decoration:none;color:inherit}
+  .brand::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
   .nav{display:flex;gap:clamp(1rem,3vw,2rem)}
-  .nav a{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:inherit;opacity:.72;padding-bottom:3px;border-bottom:1px solid transparent;transition:opacity .2s,border-color .2s}
-  .nav a:hover,.nav a:focus-visible{opacity:1;border-color:currentColor}
+  .nav a{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--ink-70);padding-bottom:3px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .nav a:hover,.nav a:focus-visible{color:var(--accent);border-color:currentColor}
 
-  .hero{background:var(--ink);color:var(--cream)}
-  .hero-inner{min-height:min(80vh,800px);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding-block:clamp(2rem,5vw,3.25rem)}
-  .hero-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.75rem}
-  .kicker{font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream);margin:0}
-  .dateline{font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;color:var(--cream-72);margin:0}
-  .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(4rem,19vw,15rem);line-height:.86;letter-spacing:-.035em;margin:0 0 clamp(1.75rem,4vw,2.75rem)}
-  .hero-about{display:grid;grid-template-columns:minmax(0,.24fr) minmax(0,1fr);gap:clamp(1.25rem,4vw,3.5rem);align-items:start;border-top:1px solid var(--cream-16);padding-top:clamp(1.5rem,3vw,2rem)}
-  .hero-about .k{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-72);margin:0}
-  .hero-about .v{font-size:clamp(1.2rem,2.1vw,1.6rem);line-height:1.4;color:var(--cream);margin:0;max-width:40rem}
+  /* ---------- Hero ---------- */
+  .hero{position:relative;margin-top:calc(-1 * var(--bar-h));padding-top:var(--bar-h);background:
+      radial-gradient(60rem 30rem at 85% 10%,rgba(29,106,100,.13),transparent 60%),
+      radial-gradient(40rem 26rem at 5% 95%,rgba(196,97,58,.10),transparent 60%),
+      var(--bg);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ink-08) 1px,transparent 1px),linear-gradient(90deg,var(--ink-08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 85%);mask-image:linear-gradient(180deg,#000 0%,transparent 85%);pointer-events:none}
+  .hero-inner{position:relative;min-height:min(82vh,820px);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding-block:clamp(2rem,5vw,3.25rem)}
+  .hero-top{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .75rem}
+  .kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-55);margin:0 .75rem 0 0}
+  .chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;padding:.42rem .8rem;border-radius:999px;border:1px solid var(--accent-line);background:rgba(255,255,255,.6);color:var(--accent-ink);white-space:nowrap}
+  .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .chip.warm{border-color:rgba(196,97,58,.32);color:#9A4523}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(4rem,19vw,15rem);line-height:.86;letter-spacing:-.035em;margin:0 0 clamp(1.75rem,4vw,2.75rem);color:var(--ink)}
+  .wordmark span{color:var(--accent)}
+  .hero-about{display:grid;grid-template-columns:minmax(0,.24fr) minmax(0,1fr);gap:clamp(1.25rem,4vw,3.5rem);align-items:start;border-top:1px solid var(--ink-14);padding-top:clamp(1.5rem,3vw,2rem)}
+  .hero-about .k{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0}
+  .hero-about .v{font-size:clamp(1.2rem,2.1vw,1.6rem);line-height:1.4;color:var(--ink);margin:0;max-width:40rem}
   .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.6,.2,1) forwards}
   .reveal.d1{animation-delay:.06s}.reveal.d2{animation-delay:.14s}
   @keyframes rise{to{opacity:1;transform:none}}
 
+  /* ---------- Sections ---------- */
   .section{border-top:1px solid var(--ink-14);padding-block:clamp(3rem,6.5vw,5.5rem);scroll-margin-top:calc(var(--bar-h) + 8px)}
   .grid{display:grid;grid-template-columns:minmax(0,.24fr) minmax(0,1fr);gap:clamp(1.5rem,5vw,4.5rem);align-items:start}
-  .label{font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);margin:0;padding-top:.35rem}
+  .label{display:flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0;padding-top:.35rem}
+  .label::before{content:"";width:18px;height:1px;background:currentColor}
   .body-text{font-size:clamp(1.15rem,1.9vw,1.42rem);line-height:1.5;margin:0;max-width:44rem}
 
-  .approach{border-top:1px solid var(--ink-14);border-bottom:1px solid var(--ink-14)}
+  /* ---------- Scroll animation (unchanged behaviour) ---------- */
+  .approach{background:var(--cream);border-top:1px solid var(--ink-14);border-bottom:1px solid var(--ink-14)}
   .flow-stage{position:relative;width:100%;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:var(--bar-h)}
-  .flow-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(6,11,11,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(6,11,11,.05) 1px,transparent 1px);background-size:56px 56px;background-position:center;-webkit-mask-image:radial-gradient(ellipse at center,#000 22%,transparent 78%);mask-image:radial-gradient(ellipse at center,#000 22%,transparent 78%);pointer-events:none}
+  .flow-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(19,40,38,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(19,40,38,.05) 1px,transparent 1px);background-size:56px 56px;background-position:center;-webkit-mask-image:radial-gradient(ellipse at center,#000 22%,transparent 78%);mask-image:radial-gradient(ellipse at center,#000 22%,transparent 78%);pointer-events:none}
   .morph-stage{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;perspective:2000px}
   .morph-svg{width:100%;height:100%;max-height:100%}
   html.nx-go .flow-track{height:560vh;position:relative}
@@ -80,18 +102,18 @@ try{
   html:not(.nx-go) .morph-svg{width:1080px;height:auto;flex:0 0 auto}
   html:not(.nx-go) .flow-stage{min-height:0;padding-block:clamp(2rem,5vw,3.5rem)}
 
-  .scene-tag{position:absolute;top:calc(var(--bar-h) + 3.5%);left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);background:var(--cream);border:1px solid var(--ink-14);padding:7px 15px;z-index:6;opacity:0;transition:opacity .35s ease;white-space:nowrap;pointer-events:none}
+  .scene-tag{position:absolute;top:calc(var(--bar-h) + 3.5%);left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-ink);background:var(--surface);border:1px solid var(--accent-line);border-radius:999px;box-shadow:var(--shadow);padding:7px 16px;z-index:6;opacity:0;transition:opacity .35s ease;white-space:nowrap;pointer-events:none}
   .scene-caption{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);width:min(720px,84%);text-align:center;font-family:var(--serif);font-size:clamp(1.05rem,1.9vw,1.45rem);line-height:1.35;color:var(--ink-70);z-index:6;opacity:0;pointer-events:none}
-  .scene-caption strong{font-weight:500;color:var(--ink)}
+  .scene-caption strong{font-weight:500;color:var(--accent-ink)}
   .scene-caption .sub{display:block;margin-top:.6rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40)}
   html:not(.nx-go) .scene-tag,html:not(.nx-go) .scene-caption{display:none}
 
   .flow-rail{position:absolute;right:clamp(14px,2.5vw,34px);top:50%;transform:translateY(-50%);width:1px;height:210px;background:var(--ink-14);z-index:6}
-  .flow-rail i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--ink);display:block}
-  .flow-rail b{position:absolute;left:50%;top:0;width:7px;height:7px;background:var(--ink);border-radius:50%;transform:translate(-50%,-50%)}
+  .flow-rail i{position:absolute;left:0;top:0;width:100%;height:0;background:var(--accent);display:block}
+  .flow-rail b{position:absolute;left:50%;top:0;width:7px;height:7px;background:var(--accent);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 4px var(--accent-soft)}
   .flow-phases{position:absolute;right:calc(clamp(14px,2.5vw,34px) + 14px);top:50%;transform:translateY(-50%);height:210px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;z-index:6;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);pointer-events:none}
   .flow-phases span{transition:color .35s ease}
-  .flow-phases span.on{color:var(--ink)}
+  .flow-phases span.on{color:var(--accent)}
   html:not(.nx-go) .flow-rail,html:not(.nx-go) .flow-phases{display:none}
 
   html.nx-go #machine-panel,html.nx-go #sysml-panel,html.nx-go #sysml-connectors,
@@ -110,54 +132,78 @@ try{
   .flow-stage:not(.live) *{animation-play-state:paused!important}
   @media (prefers-reduced-motion:reduce){.rotor,.needle,.led,.flow-line,.trace{animation:none!important}}
 
-  .token-rect{fill:#060B0B}
-  .token-text{font-family:var(--mono);font-size:9px;font-weight:700;fill:#FFF3EA;letter-spacing:1.4px;text-anchor:middle;dominant-baseline:middle}
-  .token-trail{fill:none;stroke:#060B0B;stroke-width:1;opacity:.3;stroke-dasharray:4 4}
+  .token-rect{fill:#1D6A64}
+  .token-text{font-family:var(--mono);font-size:9px;font-weight:700;fill:#FFFFFF;letter-spacing:1.4px;text-anchor:middle;dominant-baseline:middle}
+  .token-trail{fill:none;stroke:#1D6A64;stroke-width:1;opacity:.3;stroke-dasharray:4 4}
 
-  .record{background:var(--ink);color:var(--cream);padding:clamp(1.75rem,4vw,3.25rem)}
-  .record-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(1.5rem,4vw,3rem);align-items:start}
-  .venue{font-family:var(--mono);font-size:.8rem;color:var(--cream-72);margin:0 0 1.1rem}
-  .paper-title{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.08;letter-spacing:-.01em;margin:0 0 1rem;color:var(--cream)}
-  .paper-title.placeholder{color:var(--cream-72);font-weight:500}
-  .authors{font-family:var(--mono);font-size:.85rem;color:var(--cream);margin:0}
-  .links{display:flex;flex-direction:column;gap:.55rem;min-width:11rem}
-  .links a{font-family:var(--mono);font-size:.78rem;text-align:center;text-decoration:none;color:var(--cream);border:1px solid var(--cream-30);padding:.6rem .9rem;transition:background .18s,color .18s,border-color .18s}
-  .links a:hover,.links a:focus-visible{background:var(--cream);color:var(--ink);border-color:var(--cream)}
-  .results{border-top:1px solid var(--cream-16);margin:clamp(1.5rem,3vw,2rem) 0 0;padding-top:1.2rem;font-size:1.02rem;line-height:1.55;color:var(--cream-72)}
-  .results b{color:var(--cream);font-weight:500}
+  /* ---------- Results ---------- */
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.75rem,2vw,1.25rem)}
+  .stat{background:var(--surface);border:1px solid var(--ink-14);border-radius:var(--radius);padding:clamp(1.25rem,2.5vw,1.75rem);box-shadow:var(--shadow)}
+  .stat-num{font-family:var(--display);font-weight:700;font-size:clamp(2.2rem,4.5vw,3.2rem);line-height:1;letter-spacing:-.02em;color:var(--accent);margin:0 0 .6rem}
+  .stat-num small{font-size:.45em;font-weight:500;color:var(--ink-55);letter-spacing:0;margin-left:.15em}
+  .stat-txt{font-size:1rem;line-height:1.45;color:var(--ink-70);margin:0}
 
-  .people{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.75rem,4vw,3.5rem)}
+  /* ---------- Publications ---------- */
+  .pubs{display:flex;flex-direction:column;gap:clamp(1rem,2vw,1.5rem)}
+  .record{position:relative;background:var(--surface);border:1px solid var(--ink-14);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.5rem,3.5vw,2.75rem);overflow:hidden}
+  .record::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
+  .record.warm::before{background:var(--warm)}
+  .record-top{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+  .venue-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;margin:0 0 1rem}
+  .badge{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:6px;background:var(--accent-soft);color:var(--accent-ink)}
+  .record.warm .badge{background:var(--warm-soft);color:#9A4523}
+  .venue{font-family:var(--mono);font-size:.8rem;color:var(--ink-55);margin:0}
+  .venue-full{font-size:1.02rem;color:var(--ink-70);margin:0 0 1.1rem}
+  .paper-title{font-family:var(--display);font-weight:700;font-size:clamp(1.45rem,3vw,2.3rem);line-height:1.12;letter-spacing:-.01em;margin:0 0 .9rem;color:var(--ink)}
+  .paper-title.placeholder{color:var(--ink-40);font-weight:500}
+  .authors{font-family:var(--mono);font-size:.84rem;color:var(--ink-70);margin:0}
+  .links{display:flex;flex-direction:column;gap:.5rem;min-width:10.5rem}
+  .links a{font-family:var(--mono);font-size:.76rem;text-align:center;text-decoration:none;color:var(--accent-ink);border:1px solid var(--accent-line);border-radius:8px;padding:.58rem .9rem;transition:background .18s,color .18s,border-color .18s}
+  .links a:hover,.links a:focus-visible{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .record.warm .links a{color:#9A4523;border-color:rgba(196,97,58,.32)}
+  .record.warm .links a:hover,.record.warm .links a:focus-visible{background:var(--warm);color:#fff;border-color:var(--warm)}
+
+  /* ---------- Team ---------- */
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.5vw,1.5rem)}
+  .person{background:var(--surface);border:1px solid var(--ink-14);border-radius:var(--radius);padding:clamp(1.4rem,3vw,2rem);box-shadow:var(--shadow)}
+  .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.02em;background:var(--accent-soft);color:var(--accent-ink);margin-bottom:1rem}
+  .person:nth-child(2) .avatar{background:var(--warm-soft);color:#9A4523}
   .name{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:-.01em;margin:0 0 .35rem}
   .affil{font-family:var(--mono);font-size:.76rem;line-height:1.6;color:var(--ink-55);margin:0 0 1rem}
   .role-list{list-style:none;margin:0;padding:0}
   .role-list li{position:relative;padding-left:1.15rem;font-size:1.02rem;line-height:1.5;color:var(--ink-70);margin-bottom:.6rem}
   .role-list li:last-child{margin-bottom:0}
-  .role-list li::before{content:"";position:absolute;left:0;top:.75em;width:11px;height:1px;background:var(--ink-40)}
+  .role-list li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
+  /* ---------- Contact ---------- */
   .contact-note{font-size:1.1rem;color:var(--ink-70);margin:0 0 1.25rem;max-width:34rem}
-  .email{display:inline-block;font-family:var(--mono);font-weight:700;font-size:clamp(1.35rem,3.6vw,2.3rem);letter-spacing:-.01em;color:var(--ink);text-decoration:none;padding:.15rem 0 .3rem;background-image:linear-gradient(var(--ink),var(--ink));background-size:100% 2px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .25s ease,color .2s}
-  .email:hover,.email:focus-visible{background-size:0% 2px;color:var(--ink-70)}
+  .emails{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
+  .email{display:inline-block;font-family:var(--mono);font-weight:700;font-size:clamp(1.2rem,3.4vw,2.1rem);letter-spacing:-.01em;color:var(--accent-ink);text-decoration:none;padding:.15rem 0 .3rem;word-break:break-all;background-image:linear-gradient(var(--accent),var(--accent));background-size:100% 2px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .25s ease,color .2s}
+  .email:hover,.email:focus-visible{background-size:0% 2px;color:var(--accent)}
 
-  .foot{background:var(--ink);color:var(--cream)}
+  /* ---------- Footer ---------- */
+  .foot{background:var(--accent-soft);color:var(--ink);border-top:1px solid var(--accent-line)}
   .foot-inner{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:clamp(1.5rem,5vw,4rem);padding-block:clamp(2.5rem,5vw,3.75rem);align-items:start}
-  .foot-brand{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;margin:0 0 .5rem}
-  .foot-tag{font-family:var(--mono);font-size:.74rem;color:var(--cream-72);margin:0}
-  .legal{font-family:var(--mono);font-size:.74rem;line-height:1.75;color:var(--cream-72);margin:0 0 1rem;max-width:46rem}
-  .legal a{color:var(--cream)}
-  .copyright{font-family:var(--mono);font-size:.72rem;color:var(--cream-72);margin:0}
-  :focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  .foot-brand{font-family:var(--display);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;margin:0 0 .5rem;color:var(--accent-ink)}
+  .foot-tag{font-family:var(--mono);font-size:.74rem;color:var(--ink-55);margin:0}
+  .legal{font-family:var(--mono);font-size:.74rem;line-height:1.75;color:var(--ink-70);margin:0 0 1rem;max-width:46rem}
+  .legal a{color:var(--accent-ink)}
+  .copyright{font-family:var(--mono);font-size:.72rem;color:var(--ink-55);margin:0}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
   @media (max-width:900px){
     .hero-about{grid-template-columns:1fr;gap:.85rem}
     .grid{grid-template-columns:1fr;gap:1rem}
     .label{padding-top:0}
-    .people{grid-template-columns:1fr;gap:2rem}
+    .people{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr}
   }
   @media (max-width:640px){
     .record-top{grid-template-columns:1fr}
     .links{flex-direction:row;flex-wrap:wrap;min-width:0}
     .links a{flex:1 1 auto}
     .foot-inner{grid-template-columns:1fr;gap:1.75rem}
+    .chip{white-space:normal}
   }
 </style>
 </head>
@@ -166,7 +212,7 @@ try{
 <header class="topbar over-hero" id="topbar">
   <div class="container">
     <a class="brand" href="#top">NEXUS</a>
-    <nav class="nav" aria-label="Primary"><a href="#paper">Paper</a><a href="#team">Team</a><a href="#contact">Contact</a></nav>
+    <nav class="nav" aria-label="Primary"><a href="#paper">Papers</a><a href="#team">Team</a><a href="#contact">Contact</a></nav>
   </div>
 </header>
 
@@ -174,10 +220,11 @@ try{
   <div class="container hero-inner">
     <div class="hero-top reveal">
       <p class="kicker">Research project</p>
-      <p class="dateline">ICML 2026 &middot; AgenticUQ Workshop</p>
+      <span class="chip">IECON 2026 &middot; Doha, Qatar</span>
+      <span class="chip warm">ICML 2026 &middot; AgenticUQ Workshop</span>
     </div>
     <div>
-      <h1 class="wordmark reveal d1">NEXUS</h1>
+      <h1 class="wordmark reveal d1">NEXUS<span>.</span></h1>
       <div class="hero-about reveal d2">
         <p class="k">About</p>
         <p class="v">NEXUS is a research project on the automated generation of structured system models from technical documentation.</p>
@@ -469,23 +516,59 @@ try{
     </div>
   </section>
 
+  <section class="section" id="results" aria-labelledby="rs">
+    <div class="container grid">
+      <p class="label" id="rs">Results</p>
+      <div class="stats">
+        <div class="stat">
+          <p class="stat-num">100<small>%</small></p>
+          <p class="stat-txt">Syntactic validity of generated SysML v2 models.</p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">38.4<small>%</small></p>
+          <p class="stat-txt">Syntactic validity of the baseline, for comparison.</p>
+        </div>
+        <div class="stat">
+          <p class="stat-num">2.4<small>&times;</small></p>
+          <p class="stat-txt">Reduction in hallucinations compared to the baseline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="paper" aria-labelledby="pp">
     <div class="container grid">
-      <p class="label" id="pp">Paper</p>
-      <div class="record">
-        <div class="record-top">
-          <div>
-            <p class="venue">ICML 2026 &middot; AgenticUQ Workshop</p>
-            <!-- Replace the placeholder below with the exact published title. -->
-            <h2 class="paper-title placeholder">[ Full paper title ]</h2>
-            <p class="authors">Oscar Artur Bernd Berg &middot; Christoph Klaassen</p>
+      <p class="label" id="pp">Papers</p>
+      <div class="pubs">
+
+        <article class="record">
+          <div class="record-top">
+            <div>
+              <div class="venue-row">
+                <span class="badge">Conference paper</span>
+                <p class="venue">IECON 2026 &middot; Doha, Qatar &middot; 18&ndash;21 Oct 2026</p>
+              </div>
+              <p class="venue-full">52nd Annual Conference of the IEEE Industrial Electronics Society</p>
+              <h2 class="paper-title">NEXUS: A Multi-Agent Agentic Workflow for Valid SysML v2 Model Generation from Unstructured Industrial Documentation</h2>
+              <p class="authors">Oscar Artur Bernd Berg &middot; Christoph Klaassen</p>
+            </div>
           </div>
-          <div class="links">
-            <!-- Replace href="#" with the real URLs, or remove a resource that does not apply. -->
-            <a href="#">Paper (PDF)</a><a href="#">OpenReview</a><a href="#">Poster</a>
+        </article>
+
+        <article class="record warm">
+          <div class="record-top">
+            <div>
+              <div class="venue-row">
+                <span class="badge">Workshop paper</span>
+                <p class="venue">ICML 2026 &middot; AgenticUQ Workshop</p>
+              </div>
+              <p class="venue-full">International Conference on Machine Learning, Workshop on Agentic Uncertainty Quantification</p>
+              <h2 class="paper-title">NEXUS: A Multi-Agent Agentic Workflow for Valid SysML v2 Model Generation from Unstructured Industrial Documentation</h2>
+              <p class="authors">Oscar Artur Bernd Berg &middot; Christoph Klaassen</p>
+            </div>
           </div>
-        </div>
-        <p class="results"><b>Reported results.</b> 100% syntactic validity of generated SysML v2 models, against 38.4% for the baseline, and a 2.4x reduction in hallucinations.</p>
+        </article>
+
       </div>
     </div>
   </section>
@@ -494,7 +577,8 @@ try{
     <div class="container grid">
       <p class="label" id="tm">Team</p>
       <div class="people">
-        <div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">OB</div>
           <h3 class="name">Oscar Artur Bernd Berg</h3>
           <p class="affil">AI and architecture<br>PhD candidate, TU Wien and Mid Sweden University</p>
           <ul class="role-list">
@@ -502,7 +586,8 @@ try{
             <li>Responsible for the full implementation.</li>
           </ul>
         </div>
-        <div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">CK</div>
           <h3 class="name">Christoph Klaassen</h3>
           <p class="affil">Systems modelling and digital twin engineering<br>PhD, TU Wien</p>
           <ul class="role-list">
@@ -517,7 +602,7 @@ try{
   <section class="section" id="context" aria-labelledby="ct">
     <div class="container grid">
       <p class="label" id="ct">Research context</p>
-      <div><p class="body-text">NEXUS originated in research at TU Wien and Mid Sweden University and was published at ICML 2026 in the AgenticUQ workshop. The project continues this work on connecting technical documentation to formal, model-based systems engineering.</p></div>
+      <div><p class="body-text">NEXUS is an independent research project. It was published at IECON 2026, the 52nd Annual Conference of the IEEE Industrial Electronics Society in Doha, Qatar, and at the AgenticUQ Workshop at ICML 2026. The project continues this work on connecting technical documentation to formal, model-based systems engineering.</p></div>
     </div>
   </section>
 
@@ -525,8 +610,11 @@ try{
     <div class="container grid">
       <p class="label" id="cn">Contact</p>
       <div>
-        <p class="contact-note">For questions about the project or the paper, write to the project address.</p>
-        <a class="email" href="mailto:team@sysdraft.eu">team@sysdraft.eu</a>
+        <p class="contact-note">For questions about the project or the papers, get in touch by e-mail.</p>
+        <div class="emails">
+          <a class="email" href="mailto:oscar.berg@web.de">oscar.berg@web.de</a>
+          <a class="email" href="mailto:christoph.klaassen@gmail.net">christoph.klaassen@gmail.net</a>
+        </div>
       </div>
     </div>
   </section>
@@ -540,7 +628,7 @@ try{
       <p class="foot-tag">Non-commercial research project</p>
     </div>
     <div>
-      <p class="legal">Legal notice (Impressum). This is a non-commercial research project page. No goods or services are offered. Responsible for the content: Oscar Artur Bernd Berg and Christoph Klaassen. Contact: <a href="mailto:team@sysdraft.eu">team@sysdraft.eu</a>.</p>
+      <p class="legal">Legal notice (Impressum). This is a non-commercial research project page. No goods or services are offered. Responsible for the content: Oscar Artur Bernd Berg and Christoph Klaassen. Contact: <a href="mailto:oscar.berg@web.de">oscar.berg@web.de</a>, <a href="mailto:christoph.klaassen@gmail.net">christoph.klaassen@gmail.net</a>.</p>
       <p class="copyright">&copy; 2026 NEXUS</p>
     </div>
   </div>
